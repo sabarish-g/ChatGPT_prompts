@@ -59,40 +59,6 @@ params = {
     'objective': 'binary:logistic',
     'metric':
 
-Sabarish Gopalakrishnan
-what threshold should i use in such a model? 
-
-The choice of threshold in a binary classification model depends on the desired trade-off between precision and recall. A threshold of 0.5 is commonly used as a default, but it may not be optimal for imbalanced datasets, where one class is much more prevalent than the other.
-
-In an imbalanced dataset, the classifier may be biased towards the majority class, and a higher threshold can be used to reduce false negatives (predictions of the minority class) at the cost of increasing false positives (predictions of the majority class). Conversely, a lower threshold can be used to reduce false positives at the cost of increasing false negatives.
-
-A threshold that maximizes the F1 score, which is the harmonic mean of precision and recall, is a commonly used threshold for imbalanced datasets. Alternatively, you can use the receiver operating characteristic (ROC) curve, which plots the true positive rate (TPR) against the false positive rate (FPR) at different thresholds, and choose the threshold that gives the best balance of TPR and FPR.
-
-You can also consider using other performance metrics, such as the area under the ROC curve (AUC), to evaluate your model, as they are more robust in imbalanced datasets compared to accuracy.
-Sabarish Gopalakrishnan
-In the above code, you use BERT embeddings. Are universal sentence enconder embeddings better?
-
-It depends on the specific problem you are trying to solve. Both BERT and Universal Sentence Encoder (USE) embeddings are pre-trained models that can be used to represent text data as numerical features, but they have different architectures and were pre-trained on different datasets.
-
-BERT is a transformer-based model that was pre-trained on large amounts of text data in a supervised manner, using the Masked Language Modeling (MLM) task. This allows it to capture fine-grained relationships between words, such as context-based meaning, and it is widely used in NLP tasks, such as text classification and named entity recognition.
-
-USE is a deep neural network-based model that was pre-trained on a diverse range of text data, including web pages, news articles, and scientific papers, in an unsupervised manner, using a task-agnostic method. This allows it to encode a wide range of text data into dense, multi-dimensional vectors, and it is commonly used for text similarity tasks, such as semantic search and recommendation systems.
-
-In conclusion, the choice between BERT and USE embeddings will depend on the specific problem you are trying to solve and the type of text data you are working with. If you have a large amount of labeled data and are working on a specific NLP task, such as text classification, BERT may be a better choice. If you have limited labeled data or are working on a text similarity task, USE may be a better choice.
-Sabarish Gopalakrishnan
-can you define what is 'limited' data? Is 10k samples enough to use BERT features instead of USE?
-
-The definition of "limited data" can vary depending on the specific problem you are trying to solve and the complexity of your model. In general, a smaller dataset with fewer examples would be considered "limited", while a larger dataset with more examples would be considered "sufficient".
-
-For text classification tasks, 10k samples can be considered a relatively small dataset. BERT is a complex model that was pre-trained on a large corpus of text data, and it may be overkill to use BERT features for a small dataset. In such a scenario, you may be better off using a simpler model, such as USE, or fine-tuning a pre-trained BERT model on your smaller dataset.
-
-However, the amount of data you have can also depend on the complexity of the problem you are trying to solve and the amount of noise in your data. If your dataset is highly imbalanced or contains a large amount of irrelevant or noisy text data, you may need more samples to train a robust model. In such cases, using BERT may be beneficial, even for a smaller dataset.
-
-Ultimately, the choice between BERT and USE will depend on the specific problem you are trying to solve and the characteristics of your data, and it may be necessary to experiment with different models and feature extraction methods to determine the best approach.
-Sabarish Gopalakrishnan
-can you modify the above code to use a pre trained BERT model? 
-
-Certainly! Here's the code to modify the above code to use a pre-trained BERT model:
 
 python
 
@@ -130,13 +96,7 @@ clf.fit(X_train_embeddings, y_train)
 accuracy = clf.score(X_test_embeddings, y_test)
 print("Accuracy: ", accuracy)
 
-Note that this code uses a pre-trained BERT model from TensorFlow Hub, which you can fine-tune on your specific task by training on your own labeled data.
-Sabarish Gopalakrishnan
-can you add hyper parameter tuning code to the above code? 
 
-Sure! Here's the code to add hyperparameter tuning to the XGBoost classifier:
-
-python
 
 import tensorflow as tf
 import tensorflow_hub as hub
